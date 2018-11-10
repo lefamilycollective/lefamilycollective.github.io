@@ -123,3 +123,25 @@ button:focus {
   height: 1.5rem;
   animation: confettiRain 5s infinite;
 }
+
+.familyrules .r {
+  color: red;
+}
+.familyrules .o {
+  color: organge;
+}
+.familyrules .y {
+  color: gold;
+}
+.familyrules .g {
+  color: green;
+}
+.familyrules .b {
+  color: blue;
+}
+.familyrules .i {
+  color: indigo;
+}
+.familyrules .v {
+  color: violet;
+}
