@@ -1,3 +1,17 @@
+@media screen and (max-width: 992px) {
+  .forDesktop {
+    display: none;
+  }
+    
+}
+@media screen and (min-width: 993px) {
+  .forMobile {
+    display: none;
+  }
+    
+}
+
+
 ::placeholder {
     color: #fff;
     opacity: 1; /* Firefox */
