@@ -1,0 +1,99 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+  <div class="jumbomumbo">
+    <h2>ｌｅ ｆａｍｉｌｙ（りそ卸）</h2>
+    <h4>talent show (showcase vol.1)</h4>
+  </div>
+  <div class="familyrules">
+    <h5><span>family rules:</span> if any of the tracks resonate with you, enter your name and track titles below</h5>
+  </div>
+  <div class="player">
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/640830324%3Fsecret_token%3Ds-c30x8&color=%23c496b6&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+  </div>
+  
+  <div class="signup">
+    <form id="myForm" name="myForm">
+      <div class="container">
+      <input id="name" class="text-field" type="text" name="name" placeholder="ur name goes here">
+      </div>
+      <div class="container">
+      <input id="track_title" class="text-field" type="text" name="track_title" placeholder="track names go here">
+      </div>
+      <div>
+      <button class="rainbow-button" type="submit">submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="heart-chakra">
+    <span>made with &#128156;</span>
+  </div>
+  <div id="confetti-wrapper">
+  <script>
+    var $form = $('form#myForm'),
+    url = 'https://script.google.com/macros/s/AKfycbzJjoF1DkF2nZkcrmjIz3ol2ItkkvyTAs192ZteEyd2U1S2Kyw/exec'
+              $.fn.serializeObject = function() {
+               var o = {};
+               var a = this.serializeArray();
+               $.each(a, function() {
+                   if (o[this.name]) {
+                       if (!o[this.name].push) {
+                           o[this.name] = [o[this.name]];
+                       }
+                       o[this.name].push(this.value || '');
+                   } else {
+                       o[this.name] = this.value || '';
+                   }
+               });
+               return o;
+              };
+    document.querySelector("#myForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (document.forms["myForm"]["track_title"].value.length == 0){ console.log("yay!!")} 
+      else {
+        var jqxhr = $.ajax({
+          url: url,
+          method: "GET",
+          dataType: "json",
+          data: $form.serializeObject()
+        });
+        confetti();
+        document.getElementById('name').value = ''
+        document.getElementById('track_title').value = ''
+      };
+    });
+    
+    function confetti(){
+      for(i=0; i<200; i++) {
+        // Random rotation
+        var randomRotation = Math.floor(Math.random() * 360);
+        // Random width & height between 0 and viewport
+        var randomWidth = Math.floor(Math.random() * Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
+        var randomHeight =  Math.floor(Math.random() * Math.max(document.documentElement.clientHeight, window.innerHeight || 0));
+
+        // Random animation-delay
+        var randomAnimationDelay = Math.floor(Math.random() * 10);
+        //console.log(randomAnimationDelay)
+
+        // Random colors
+        var colors = ['#0CD977', '#FF1C1C','#DDA0DD', '#C5EBC3', '#1F5673', '#759FBC', '#E2DBBE', '#FFA630']
+        var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        // Create confetti piece
+        var confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.top=randomHeight + 'px';
+        confetti.style.left=randomWidth + 'px';
+        confetti.style.backgroundColor=randomColor;
+        confetti.style.transform='skew(15deg) rotate(' + randomRotation + 'deg)';
+        confetti.style.animationDelay=randomAnimationDelay + 's';
+        document.getElementById("confetti-wrapper").appendChild(confetti);
+      }
+      setTimeout(function() {
+        $('.confetti').remove();
+      }, 20000);
+    };
+  </script>
+</body>
